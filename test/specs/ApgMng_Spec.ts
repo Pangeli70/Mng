@@ -19,10 +19,6 @@ import {
 import {
     ApgMng_Spec_IUser_Schema
 } from "../interfaces/ApgMng_Spec_Schema_IUser.ts";
-import {
-    ApgMng_Spec_DbCollection_TUsers
-} from "../types/ApgMng_Spec_Types.ts";
-
 
 
 
@@ -156,12 +152,12 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S01a_DeleteAll, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S01a_DeleteAll, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const r1 = await this._users.deleteAll();
         const n = r1.ok ? r1.payload! : 0;
-        r = n > 0;
+        const r = n > 0;
 
         spec
             .When(`we want to delete all the users from the test collection`)
@@ -177,11 +173,11 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S02a_InsertOne, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S02a_InsertOne, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const r1 = await this._users.createOne(ApgMng_Spec_Data_Users.single);
-        r = r1.ok;
+        const r = r1.ok;
         if (r) {
             this._singleInsertObjectId = r1.payload!;
         }
@@ -199,12 +195,12 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S02b_Count, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S02b_Count, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const r1 = await this._users.countAll();
         const n = r1.ok ? r1.payload! : 0;
-        r = n === 1;
+        const r = n === 1;
 
         spec
             .When(`we want to count items in the collection after a single insertion`)
@@ -220,13 +216,12 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S02c_InsertMany, this.runFlags);
-        if (!r) return;
-
+        spec.Init(this.S02c_InsertMany, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const r1 = await this._users.createMany(ApgMng_Spec_Data_Users.many);
         const n = r1.ok ? r1.payload!.insertedCount : 0;
-        r = n > 0;
+        const r = n > 0;
 
         spec
             .When(`we want to insert many users into the test collection`)
@@ -250,10 +245,10 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S03a_FindOneByID, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S03a_FindOneByID, this.runFlags);
+        if (spec.DoSkip()) return;
 
-        r = this._singleInsertObjectId !== null;
+        let r = this._singleInsertObjectId !== null;
         if (!r) {
             spec.Skip(
                 `We need the result of ${this.S02a_InsertOne.name} to run this spec.`
@@ -278,15 +273,15 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S03b_FindOneByFilter, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S03b_FindOneByFilter, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const USER_NAME = ApgMng_Spec_Data_Users.many[1].username;
         const PASSWORD = ApgMng_Spec_Data_Users.many[1].password;
 
         const r1 = await this._users.searchOneByFilter({ password: PASSWORD });
         const userName = r1.ok ? r1.payload?.username : "undefined";
-        r = userName == USER_NAME;
+        const r = userName == USER_NAME;
 
         spec
             .When(`we want to find one user with a specific password [${PASSWORD}]`)
@@ -301,15 +296,15 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S03c_FindAllDescSorted, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S03c_FindAllDescSorted, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const COUNT = ApgMng_Spec_Data_Users.many.length + 1;
 
         const r1 = await this._users.getAllDescSortedByUserName();
         const users = r1.ok ? r1.payload! : [];
         const n = users ? users.length : 0;
-        r = n == COUNT;
+        let r = n == COUNT;
 
         spec
             .When(`we want retrieve all the users from the collection sorted in descending order`)
@@ -334,8 +329,8 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S03d_FindAllAndSkipSome, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S03d_FindAllAndSkipSome, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const SKIP_NUM = 2;
         const TOTAL_NUM = ApgMng_Spec_Data_Users.many.length + 1;
@@ -346,7 +341,7 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
             .skip(SKIP_NUM)
             .toArray();
         const n = r1.length;
-        r = n == RES_NUM;
+        const r = n == RES_NUM;
 
         spec
             .When(`we want to find some users skipping the first [${SKIP_NUM}]`)
@@ -361,8 +356,8 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S03e_FindAllAndLimitToFirstN, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S03e_FindAllAndLimitToFirstN, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const LIMIT_NUM = 3;
 
@@ -371,7 +366,7 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
             .limit(LIMIT_NUM)
             .toArray();
         const n = r1.length;
-        r = n == LIMIT_NUM;
+        const r = n == LIMIT_NUM;
 
         spec
             .When(`we want to find some users limiting the result to the first [${LIMIT_NUM}]`)
@@ -386,15 +381,15 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S04a_CountWithFilter, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S04a_CountWithFilter, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const GROUP_NAME = ApgMng_Spec_Data_Users.many[2].group;
         const EXPECT_NUM = 2;
 
         const r1 = await this._users.countByFilter({ group: GROUP_NAME });
         const n = (r1.ok) ? r1.payload : 0;
-        r = n == EXPECT_NUM
+        const r = n == EXPECT_NUM
 
         spec
             .When(`we want to count all the items in the collection of the group [${GROUP_NAME}]`)
@@ -409,15 +404,15 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S04b_CountByAggregateWithSkipOption, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S04b_CountByAggregateWithSkipOption, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const SKIP_NUM = 3;
         const EXPECT_NUM = ApgMng_Spec_Data_Users.many.length + 1 - SKIP_NUM
 
         const r1 = await this._users.countWithSkipOption(SKIP_NUM);
         const n = (r1.ok) ? r1.payload : 0;
-        r = n == EXPECT_NUM
+        const r = n == EXPECT_NUM
 
         spec
             .When(`we want count the items in the collection skipping [${SKIP_NUM}] of them`)
@@ -433,8 +428,8 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S05a_UpdateSingle, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S05a_UpdateSingle, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const NEW_PWD = "newPassword";
 
@@ -443,7 +438,7 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
             { password: NEW_PWD }
         );
         const n = r1.ok ? r1.payload!.modifiedCount : 0;
-        r = n == 1;
+        const r = n == 1;
 
         spec
             .When(`we want to update the password of the user named ${ApgMng_Spec_Data_Users.single.username}`)
@@ -458,8 +453,8 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S05b_UpdateMany, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S05b_UpdateMany, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const NEW_GROUP = "newGroup";
         const OLD_GROUP = ApgMng_Spec_Data_Users.many[2].group;
@@ -470,7 +465,7 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
             { group: NEW_GROUP }
         )
         const n = r1.ok ? r1.payload!.modifiedCount : 0;
-        r = n == UPDATED_NUM;
+        const r = n == UPDATED_NUM;
 
         spec
             .When(`we want to update the group of the users in ${OLD_GROUP}`)
@@ -485,10 +480,10 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S06a_DeleteSingleById, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S06a_DeleteSingleById, this.runFlags);
+        if (spec.DoSkip()) return;
 
-        r = this._singleInsertObjectId !== null;
+        let r = this._singleInsertObjectId !== null;
         if (!r) {
             spec.Skip(
                 `We need the result of ${this.S02a_InsertOne.name} to run this spec.`
@@ -513,8 +508,8 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         if (!this._users) return;
         const spec = Spc.ApgSpc_Service;
-        let r = spec.Init(this.S06b_DeleteManyByFilter, this.runFlags);
-        if (!r) return;
+        spec.Init(this.S06b_DeleteManyByFilter, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const EXPECT_NUM = 2;
         const GROUP = ApgMng_Spec_Data_Users.many[2].group;
@@ -522,7 +517,7 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         const r1 = await this._users.countByFilter(FILTER);
         const n = r1.ok ? r1.payload : 0;
-        r = n == EXPECT_NUM;
+        const r = n == EXPECT_NUM;
 
         spec
             .When(`we want to delete the users that are in the group [${GROUP}]`)
