@@ -7,12 +7,8 @@
  * ------------------------------------------------------------------------
  */
 
-import {
-    Mongo, Uts
-} from "../deps.ts";
-import {
-    ApgMng_DB
-} from "./ApgMng_DB.ts";
+import {Mongo, Uts} from "../deps.ts";
+import {ApgMng_DB} from "./ApgMng_DB.ts";
 
 
 

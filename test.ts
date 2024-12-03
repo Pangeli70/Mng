@@ -19,15 +19,9 @@ for (const k in env) {
     }
 }
 
-import {
-    Mng
-} from "./mod.ts";
-import {
-    Spc
-} from "./test/deps.ts";
-import {
-    ApgMng_Spec
-} from "./test/specs/ApgMng_Spec.ts";
+import {Mng} from "./mod.ts";
+import {Spc} from "./test/deps.ts";
+import {ApgMng_Spec} from "./test/specs/ApgMng_Spec.ts";
 
 
 // Remote test result browser service address 

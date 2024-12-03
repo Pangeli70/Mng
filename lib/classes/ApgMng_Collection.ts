@@ -1,14 +1,8 @@
-import {
-    Mongo, Uts
-} from "../deps.ts";
-import {
-    ApgMng_IUpdateManyResult,
-    ApgMng_IUpdateOneResult
-} from "../interfaces/ApgMng_IUpdateResults.ts";
-import {
-    ApgMng_TInsertResult,
-    ApgMng_TMultipleInsertResult
-} from "../types/ApgMng_TInsertResults.ts";
+import {Mongo, Uts} from "../deps.ts";
+import {ApgMng_IUpdateManyResult,
+    ApgMng_IUpdateOneResult} from "../interfaces/ApgMng_IUpdateResults.ts";
+import {ApgMng_TInsertResult,
+    ApgMng_TMultipleInsertResult} from "../types/ApgMng_TInsertResults.ts";
 
 
 

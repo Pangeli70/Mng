@@ -8,13 +8,11 @@
  * ------------------------------------------------------------------------
  */
 export type {
-    ApgMng_IUpdateManyResult, ApgMng_IUpdateOneResult
-} from './interfaces/ApgMng_IUpdateResults.ts';
+    ApgMng_IUpdateManyResult, ApgMng_IUpdateOneResult} from './interfaces/ApgMng_IUpdateResults.ts';
 
 export type {
     ApgMng_TInsertResult,
-    ApgMng_TMultipleInsertResult
-} from './types/ApgMng_TInsertResults.ts';
+    ApgMng_TMultipleInsertResult} from './types/ApgMng_TInsertResults.ts';
 
 export { ApgMng_Collection } from './classes/ApgMng_Collection.ts';
 export { ApgMng_DB } from './classes/ApgMng_DB.ts';

@@ -8,9 +8,7 @@
  * ------------------------------------------------------------------------
  */
 
-import {
-    Mongo, Uts
-} from "../deps.ts";
+import {Mongo, Uts} from "../deps.ts";
 
 
 export abstract class ApgMng_DB extends Uts.ApgUts_Class {
