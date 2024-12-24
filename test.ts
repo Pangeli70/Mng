@@ -1,10 +1,13 @@
 /** -----------------------------------------------------------------------
- * @module [apg-mng]
+ * @module [ApgMng]
  * @author [APG] ANGELI Paolo Giusto
  * @version 0.9.2 [APG 2022/10/04] Github Beta
  * @version 0.9.7 [APG 2023/05/21] Separation of concerns lib/srv
+ * @version 1.0.0 [APG 2024/09/21] Moving to Deno 2
  * -----------------------------------------------------------------------
 */
+
+
 import { loadSync } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
 loadSync({ export: true });
 
@@ -19,11 +22,12 @@ for (const k in env) {
     }
 }
 
-import {Mng} from "./mod.ts";
-import {Spc} from "./test/deps.ts";
-import {ApgMng_Spec} from "./test/specs/ApgMng_Spec.ts";
+import { Mng } from "./mod.ts";
+import { Spc } from "./test/deps.ts";
+import { ApgMng_Spec } from "./test/specs/ApgMng_Spec.ts";
 
 
+// Todo This is deprecated sooner or later remove it --APG 20241224
 // Remote test result browser service address 
 const RESULTS_BROWSER_URI = "https://apg-tst.deno.dev/store";
 
@@ -36,32 +40,46 @@ async function ApgMng_Suite(arun: Spc.ApgSpc_eRun) {
 
     if (arun != Spc.ApgSpc_eRun.yes) return;
 
-    const Local_Db_Spec = new ApgMng_Spec(Mng.ApgMng_eMode.local);
+    const results: Spc.ApgSpc_TSpecResult[] = [];
 
-    if (await Local_Db_Spec.Run(Spc.ApgSpc_eRun.yes)) {
+
+    const Local_Db_Spec = new ApgMng_Spec(Mng.ApgMng_eMode.local);
+    const r1 = await Local_Db_Spec.Run(Spc.ApgSpc_eRun.yes)
+
+    if (r1) {
+
+        results.push(Spc.ApgSpc_Service.Result());
+
         const r = await Local_Db_Spec.SendEventsToTestService(
             RESULTS_BROWSER_URI,
             FRAMEWORK,
             Local_Db_Spec.NAME
         );
-        if (r) Spc.ApgSpc_Service.ClearEvents();
+
+        Spc.ApgSpc_Service.Reset();
     }
 
 
     const Atlas_Db_Spec = new ApgMng_Spec(Mng.ApgMng_eMode.atlas);
+    const r2 = await Atlas_Db_Spec.Run(Spc.ApgSpc_eRun.yes)
 
-    if (await Atlas_Db_Spec.Run(Spc.ApgSpc_eRun.yes)) {
+    if (r2) {
+
+        results.push(Spc.ApgSpc_Service.Result());
+
         const r = await Atlas_Db_Spec.SendEventsToTestService(
             RESULTS_BROWSER_URI,
             FRAMEWORK,
             Atlas_Db_Spec.NAME
         );
-        if (r) Spc.ApgSpc_Service.ClearEvents();
+
+        Spc.ApgSpc_Service.Reset();
     }
 
-    Spc.ApgSpc_Service.FinalReport();
+    Spc.ApgSpc_Service.FinalReport(results);
+
 }
 
-
+// Run the test suite
 await ApgMng_Suite(Spc.ApgSpc_eRun.yes);
 

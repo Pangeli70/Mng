@@ -1,7 +1,6 @@
 /** ---------------------------------------------------------------------------
  * @module [ApgMng]
  * @author [APG] Angeli Paolo Giusto 
- * @description Librerie del monorepo
  * @version 0.1 APG 20240921 Integration in Deno 2
  * ----------------------------------------------------------------------------
  */

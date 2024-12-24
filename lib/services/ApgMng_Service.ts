@@ -1,17 +1,18 @@
 /** ---------------------------------------------------------------------------
- * @module [ApgEdr_Mail]
+ * @module [ApgMng]
  * @author [APG] Angeli Paolo Giusto
- * @version 0.1 APG 20240701
- * @version 0.2 APG 20241017 Extends ApgUts_Service
+ * @version 0.9.0 [APG 2024/07/01]
+ * @version 0.9.8 [APG 2024/10/17] Extends ApgUts_Service
+ * @version 1.0.0 [APG 2024/12/24] Moving to Deno 2
  * ----------------------------------------------------------------------------
  */
 
-import {ApgMng_DB_Atlas} from "../classes/ApgMng_DB_Atlas.ts";
-import {ApgMng_DB_Local} from "../classes/ApgMng_DB_Local.ts";
-import {Uts} from "../deps.ts";
-import {ApgMng_Env_eEntry} from "../enums/ApgMng_Env_eEntry.ts";
-import {Mongo} from "../imports/mongo.ts";
-import {ApgEdr_MongoDb_CollectionPair} from "../interfaces/ApgMng_ICollectionPair.ts";
+import { ApgMng_DB_Atlas } from "../classes/ApgMng_DB_Atlas.ts";
+import { ApgMng_DB_Local } from "../classes/ApgMng_DB_Local.ts";
+import { Uts } from "../deps.ts";
+import { ApgMng_Env_eEntry } from "../enums/ApgMng_Env_eEntry.ts";
+import { Mongo } from "../imports/mongo.ts";
+import { ApgEdr_MongoDb_CollectionPair } from "../interfaces/ApgMng_ICollectionPair.ts";
 
 
 
