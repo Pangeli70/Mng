@@ -24,7 +24,7 @@ for (const k in env) {
 
 import { Mng } from "./mod.ts";
 import { Spc } from "./test/deps.ts";
-import { ApgMng_Spec } from "./test/specs/ApgMng_Spec.ts";
+import { Specs } from "./specs.ts";
 
 
 // Todo This is deprecated sooner or later remove it --APG 20241224
@@ -43,7 +43,7 @@ async function ApgMng_Suite(arun: Spc.ApgSpc_eRun) {
     const results: Spc.ApgSpc_TSpecResult[] = [];
 
 
-    const Local_Db_Spec = new ApgMng_Spec(Mng.ApgMng_eMode.local);
+    const Local_Db_Spec = new Specs.ApgMng_Spec(Mng.ApgMng_eMode.local);
     const r1 = await Local_Db_Spec.Run(Spc.ApgSpc_eRun.yes)
 
     if (r1) {
@@ -60,7 +60,7 @@ async function ApgMng_Suite(arun: Spc.ApgSpc_eRun) {
     }
 
 
-    const Atlas_Db_Spec = new ApgMng_Spec(Mng.ApgMng_eMode.atlas);
+    const Atlas_Db_Spec = new Specs.ApgMng_Spec(Mng.ApgMng_eMode.atlas);
     const r2 = await Atlas_Db_Spec.Run(Spc.ApgSpc_eRun.yes)
 
     if (r2) {
@@ -79,6 +79,8 @@ async function ApgMng_Suite(arun: Spc.ApgSpc_eRun) {
     Spc.ApgSpc_Service.FinalReport(results);
 
 }
+
+
 
 // Run the test suite
 await ApgMng_Suite(Spc.ApgSpc_eRun.yes);
