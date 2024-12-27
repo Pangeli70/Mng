@@ -133,12 +133,12 @@ export class ApgMng_Service extends Uts.ApgUts_Service {
 
 
 
-    static async getDbCollectionPair<T extends Mongo.Document>(
+    static async getDbCollectionPairOrPanic<T extends Mongo.Document>(
         acollectionName: string,
     ) {
 
         await this.InitOrPanic();
-        const e = this.LogBegin(this.getDbCollectionPair, acollectionName);
+        const e = this.LogBegin(this.getDbCollectionPairOrPanic, acollectionName);
 
         const r = new Uts.ApgUts_Result<ApgEdr_MongoDb_CollectionPair<T>>();
 

@@ -107,7 +107,7 @@ export class ApgMng_Spec extends Spc.ApgSpc_Base {
 
         await Mng.ApgMng_Service.InitOrPanic();
 
-        const r1 = await Mng.ApgMng_Service.getDbCollectionPair<ApgMng_Spec_IUser_Schema>(COLLECTION_NAME)
+        const r1 = await Mng.ApgMng_Service.getDbCollectionPairOrPanic<ApgMng_Spec_IUser_Schema>(COLLECTION_NAME)
 
         if (!r1.ok) {
             r.error(this.mockInit.name, `Impossibile to connect to [${DB_NAME}] database`, r1.messages)
