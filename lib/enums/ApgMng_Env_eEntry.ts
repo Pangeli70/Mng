@@ -1,6 +1,6 @@
 /** ---------------------------------------------------------------------------
  * @module [ApgMng]
- * @author [APG] Angeli Paolo Giusto
+ * @author [APG] ANGELI Paolo Giusto
  * @version 0.9.0 [APG 2024/07/13]
  * @version 0.9.1 [APG 2024/07/26] English comments
  * @version 1.0.0 [APG 2024/09/21] Moving to Deno 2
