@@ -9,14 +9,10 @@
 
 
 import { Mongo, Uts } from "../deps.ts";
-import {
-    ApgMng_IUpdateManyResult,
-    ApgMng_IUpdateOneResult
-} from "../interfaces/ApgMng_IUpdateResults.ts";
-import {
-    ApgMng_TInsertResult,
-    ApgMng_TMultipleInsertResult
-} from "../types/ApgMng_TInsertResults.ts";
+import { ApgMng_IUpdateManyResult,
+    ApgMng_IUpdateOneResult } from "../interfaces/ApgMng_IUpdateResults.ts";
+import { ApgMng_TInsertResult,
+    ApgMng_TMultipleInsertResult } from "../types/ApgMng_TInsertResults.ts";
 
 
 
@@ -53,7 +49,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
             r.setPayload(p)
         }
         catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
         return r;
     }
@@ -71,7 +68,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
             r.setPayload(p)
         }
         catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
         return r;
     }
@@ -99,7 +97,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
             }
         }
         catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
 
         return r;
@@ -124,7 +123,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
             }
         }
         catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
 
         return r;
@@ -151,7 +151,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
             }
         }
         catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
 
         return r;
@@ -171,7 +172,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
             const p = await this._collection.deleteOne(filter);
             r.setPayload(p);
         } catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
 
         return r;
@@ -189,7 +191,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
             const p = await this._collection.deleteMany(afilter);
             r.setPayload(p,);
         } catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
         return r;
     }
@@ -205,7 +208,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
             r.setPayload(p)
         }
         catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
         return r;
     }
@@ -235,7 +239,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
             r.setPayload(p)
 
         } catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
 
         return r;
@@ -253,7 +258,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
             const p = await this._collection.countDocuments(afilter);
             r.setPayload(p);
         } catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
 
         return r;
@@ -269,7 +275,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
             const p = await this._collection.countDocuments();
             r.setPayload(p,)
         } catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
         return r;
     }
@@ -292,7 +299,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
             r.setPayload(p)
 
         } catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
         return r;
     }
@@ -312,7 +320,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
             const p = await this._collection.updateMany(afilter, newVal);
             r.setPayload(p)
         } catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
         return r;
     }
@@ -334,7 +343,8 @@ export class ApgMng_Collection<T extends Mongo.Document> extends Uts.ApgUts_Clas
 
             r.setPayload(p)
         } catch (e) {
-            r.error(METHOD, e.message);
+            const err = e as Error;
+            r.error(METHOD, err.message);
         }
         return r;
     }
