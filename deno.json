@@ -3,7 +3,7 @@
     "noImplicitOverride": true
   },
   "tasks": {
-    "test": "deno run -A --unstable --watch test.ts",
+    "test": "deno run -A --env --watch test.ts",
     "cacheLib": "deno cache --reload --lock ./lib/deps.ts",
     "cacheTst": "deno cache --reload --lock ./test/deps.ts"
   }

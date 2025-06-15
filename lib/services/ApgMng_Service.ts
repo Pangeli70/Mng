@@ -12,7 +12,7 @@ import { ApgMng_DB_Local } from "../classes/ApgMng_DB_Local.ts";
 import { Uts } from "../deps.ts";
 import { ApgMng_Env_eEntry } from "../enums/ApgMng_Env_eEntry.ts";
 import { Mongo } from "../imports/mongo.ts";
-import { ApgEdr_MongoDb_CollectionPair } from "../interfaces/ApgMng_ICollectionPair.ts";
+import { ApgMng_MongoDb_CollectionPair } from "../interfaces/ApgMng_ICollectionPair.ts";
 
 
 
@@ -140,10 +140,10 @@ export class ApgMng_Service extends Uts.ApgUts_Service {
         await this.InitOrPanic();
         const e = this.LogBegin(this.getDbCollectionPairOrPanic, acollectionName);
 
-        const r = new Uts.ApgUts_Result<ApgEdr_MongoDb_CollectionPair<T>>();
+        const r = new Uts.ApgUts_Result<ApgMng_MongoDb_CollectionPair<T>>();
 
 
-        const p: ApgEdr_MongoDb_CollectionPair<T> = {}
+        const p: ApgMng_MongoDb_CollectionPair<T> = {}
 
 
         if (this._doLocalDb && this._localDb) {

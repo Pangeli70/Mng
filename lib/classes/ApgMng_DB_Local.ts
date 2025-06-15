@@ -75,9 +75,9 @@ export class ApgMng_DB_Local extends ApgMng_DB {
                 this.logInfo(e.method, `Connection established to local host`);
                 break;
 
-            } catch (e) {
-
-                this.logInfo(e.method, `Connection attempt [${i}] failed on local host: ${e.message}. Retrying in [${this.connectionTimeoutMs}]ms ...`);
+            } catch (err) {
+                const error = err as Error;
+                this.logInfo(e.method, `Connection attempt [${i}] failed on local host: ${error.message}. Retrying in [${this.connectionTimeoutMs}]ms ...`);
                 this.client.close();
                 await new Promise((resolve) => setTimeout(resolve, this.connectionTimeoutMs));
             }

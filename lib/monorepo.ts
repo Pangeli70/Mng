@@ -8,13 +8,13 @@
 
 // Apg local monorepo
 //---------------------
-/* Local >>
+// Local >>>
 export * from "../../Uts/mod.ts";
-Local << */
+// Local <<<
 
 
 // Apg Github repos
 //---------------------
-// Github >>>
+/* Github >>
 export * from "https://raw.githubusercontent.com/Pangeli70/Uts/master/mod.ts";
-// Github <<<
+Github << */

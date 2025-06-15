@@ -108,9 +108,9 @@ export class ApgMng_DB_Atlas extends ApgMng_DB {
                     this.logInfo(e.method, `Connection established using shard host [${shardHost}]`);
                     break;
 
-                } catch (e) {
-
-                    this.logInfo(e.method, `Connection error on shard host [${shardHost}]: ${e.message}`);
+                } catch (err) {
+                    const error = err as Error;
+                    this.logInfo(e.method, `Connection error on shard host [${shardHost}]: ${error.message}`);
                     this.client.close();
 
                 }
